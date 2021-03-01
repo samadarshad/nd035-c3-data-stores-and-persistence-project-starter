@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.pet;
 
 import com.udacity.jdnd.course3.critter.schedule.Schedule;
+import com.udacity.jdnd.course3.critter.schedule.ScheduleConsumer;
 import com.udacity.jdnd.course3.critter.user.customer.Customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +10,13 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-public class Pet {
+public class Pet implements ScheduleConsumer {
     @Id
     @GeneratedValue
     private Long id;
@@ -27,6 +29,10 @@ public class Pet {
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer owner;
 
-    @ManyToMany
-    private List<Schedule> schedules;
+//    @ManyToMany
+//    private List<Schedule> schedules = new ArrayList<>();
+
+    public Boolean addToSchedule(Schedule schedule) {
+        return schedules.add(schedule);
+    }
 }

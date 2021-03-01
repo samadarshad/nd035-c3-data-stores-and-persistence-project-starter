@@ -51,10 +51,10 @@ public class PetController {
         return pets.stream().map(PetController::convertEntityToDTO).collect(Collectors.toList());
     }
 
-    private static PetDTO convertEntityToDTO(Pet pet) {
-        PetDTO petDTO = new PetDTO();
-        BeanUtils.copyProperties(pet, petDTO);
-        return petDTO;
+    private static PetDTO convertEntityToDTO(Pet entity) {
+        PetDTO dto = new PetDTO();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
     }
 
     private Pet convertDTOToEntity(PetDTO dto) {
