@@ -33,16 +33,6 @@ public class ScheduleController {
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         Schedule schedule = convertDTOToEntity(scheduleDTO);
         schedule = scheduleService.save(schedule);
-
-        if (scheduleDTO.getEmployeeIds() != null) {
-            Schedule finalSchedule = schedule;
-            scheduleDTO.getEmployeeIds().forEach(employeeId -> employeeService.get(employeeId).addToSchedule(finalSchedule));
-        }
-
-        if (scheduleDTO.getPetIds() != null) {
-            Schedule finalSchedule = schedule;
-            scheduleDTO.getPetIds().forEach(petId -> petService.get(petId).addToSchedule(finalSchedule));
-        }
         return convertEntityToDTO(schedule);
     }
 

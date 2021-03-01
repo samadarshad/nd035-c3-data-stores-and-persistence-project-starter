@@ -11,9 +11,13 @@ public class ScheduleService {
     ScheduleRepository scheduleRepository;
 
     public Schedule save(Schedule schedule) {
-        // save to pet
-        // save to employee
-        return scheduleRepository.save(schedule);
+        scheduleRepository.save(schedule);
+        assert(schedule.getId() != null);
+
+        schedule.getEmployees().forEach(employee -> employee.addToSchedule(schedule));
+        schedule.getPets().forEach(pet -> pet.addToSchedule(schedule));
+
+        return schedule;
     }
 
     public List<Schedule> list() {
