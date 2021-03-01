@@ -7,11 +7,9 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED) //Joined inheritance to support not-null values in children
 @Getter
 @Setter
-@NoArgsConstructor
+@MappedSuperclass
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
