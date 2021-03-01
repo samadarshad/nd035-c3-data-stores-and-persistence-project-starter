@@ -9,11 +9,13 @@ import com.udacity.jdnd.course3.critter.user.customer.Customer;
 import com.udacity.jdnd.course3.critter.user.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CustomerService extends UserService<Customer> {
     @Autowired
     CustomerRepository customerRepository;
@@ -36,7 +38,11 @@ public class CustomerService extends UserService<Customer> {
     }
 
     public Customer save(Customer customer) {
-        return customerRepository.save(customer);
+        customerRepository.save(customer);
+        assert(customer.getId() != null);
+
+        customer.getPets().forEach(pet -> pet.setOwner(customer));
+        return customer;
     }
 
     public Customer getOwnerByPet(Pet pet) {

@@ -39,14 +39,9 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
+//        customerDTO.setId(null);
         Customer customer = convertDTOToEntity(customerDTO);
         customer = customerService.save(customer);
-
-        //update children - should this be in the service layer, instead of the controller layer? But how will I propogate the children ID which is in the DTO to the service layer?
-        if (customerDTO.getPetIds() != null) {
-            Customer finalCustomer = customer;
-            customerDTO.getPetIds().forEach(petId -> petService.get(petId).setOwner(finalCustomer));
-        }
         return convertEntityToDTO(customer);
     }
 
