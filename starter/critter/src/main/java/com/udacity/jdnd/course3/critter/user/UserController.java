@@ -39,7 +39,6 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-//        customerDTO.setId(null);
         Customer customer = convertDTOToEntity(customerDTO);
         customer = customerService.save(customer);
         return convertEntityToDTO(customer);
