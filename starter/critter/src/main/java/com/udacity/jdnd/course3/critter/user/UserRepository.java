@@ -8,5 +8,5 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface UserRepository<T extends User> extends JpaRepository<T, Long> {
-    List<User> getAllByName(String name);
+    List<T> getAllByName(String name);
 }
