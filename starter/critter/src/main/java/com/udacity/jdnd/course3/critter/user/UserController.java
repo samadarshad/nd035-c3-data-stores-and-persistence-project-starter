@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
         Pet pet = petService.get(petId);
-        Customer customer = pet.getOwner();
+        Customer customer = customerService.getOwnerByPet(pet);
         return convertEntityToDTO(customer);
     }
 

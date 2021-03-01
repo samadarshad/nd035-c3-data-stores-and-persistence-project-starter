@@ -1,6 +1,8 @@
 package com.udacity.jdnd.course3.critter.pet;
 
 import com.udacity.jdnd.course3.critter.user.customer.Customer;
+import com.udacity.jdnd.course3.critter.user.customer.CustomerRepository;
+import com.udacity.jdnd.course3.critter.user.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ public class PetService {
     }
 
     public Pet save(Pet pet) {
+        pet.getOwner().addToPets(pet);
         return petRepository.save(pet);
     }
 

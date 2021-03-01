@@ -26,9 +26,6 @@ public class PetController {
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
         Pet pet = convertDTOToEntity(petDTO);
         pet = petService.save(pet);
-
-        //update parent
-        customerService.get(petDTO.getOwnerId()).addToPets(pet);
         return convertEntityToDTO(pet);
     }
 

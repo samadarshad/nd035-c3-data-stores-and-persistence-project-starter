@@ -8,7 +8,7 @@ import org.hibernate.annotations.Nationalized;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED) //Joined inheritance to support not-null values in children
 @Getter
 @Setter
 @NoArgsConstructor
