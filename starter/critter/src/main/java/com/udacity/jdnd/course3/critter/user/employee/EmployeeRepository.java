@@ -11,5 +11,5 @@ import java.util.Set;
 
 @Repository
 public interface EmployeeRepository extends UserRepository<Employee> {
-    List<Employee> findAllBySkillsInAndDaysAvailable(Set<EmployeeSkill> skills, DayOfWeek day);
+    List<Employee> findDistinctBySkillsInAndDaysAvailable(Set<EmployeeSkill> skills, DayOfWeek day);
 }

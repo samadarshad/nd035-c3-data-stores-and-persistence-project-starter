@@ -47,7 +47,7 @@ public class EmployeeService extends UserService<Employee> {
     }
 
     public List<Employee> findEmployeesForService(Set<EmployeeSkill> skills, DayOfWeek day) {
-        List<Employee> possibleEmployees = employeeRepository.findAllBySkillsInAndDaysAvailable(skills, day);
+        List<Employee> possibleEmployees = employeeRepository.findDistinctBySkillsInAndDaysAvailable(skills, day);
         return possibleEmployees.stream().filter(employee -> employee.getSkills().containsAll(skills)).collect(Collectors.toList());
     }
 }
