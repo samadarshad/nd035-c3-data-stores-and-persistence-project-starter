@@ -29,8 +29,8 @@ public class Pet implements ScheduleConsumer {
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer owner;
 
-//    @ManyToMany
-//    private List<Schedule> schedules = new ArrayList<>();
+    @ManyToMany
+    private List<Schedule> schedules = new ArrayList<>();
 
     public Boolean addToSchedule(Schedule schedule) {
         return schedules.add(schedule);

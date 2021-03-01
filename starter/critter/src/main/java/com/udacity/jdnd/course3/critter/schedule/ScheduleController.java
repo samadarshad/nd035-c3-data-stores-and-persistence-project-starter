@@ -5,6 +5,7 @@ import com.udacity.jdnd.course3.critter.pet.PetDTO;
 import com.udacity.jdnd.course3.critter.pet.PetService;
 import com.udacity.jdnd.course3.critter.user.UserController;
 import com.udacity.jdnd.course3.critter.user.customer.Customer;
+import com.udacity.jdnd.course3.critter.user.customer.CustomerService;
 import com.udacity.jdnd.course3.critter.user.employee.Employee;
 import com.udacity.jdnd.course3.critter.user.employee.EmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,9 @@ public class ScheduleController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    CustomerService customerService;
+
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         Schedule schedule = convertDTOToEntity(scheduleDTO);
@@ -44,17 +48,23 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        Pet pet = petService.get(petId);
+        List<Schedule> schedules = scheduleService.getByPet(pet);
+        return schedules.stream().map(ScheduleController::convertEntityToDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        Employee employee = employeeService.get(employeeId);
+        List<Schedule> schedules = scheduleService.getByEmployee(employee);
+        return schedules.stream().map(ScheduleController::convertEntityToDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        throw new UnsupportedOperationException();
+        Customer customer = customerService.get(customerId);
+        List<Schedule> schedules = scheduleService.getByCustomer(customer);
+        return schedules.stream().map(ScheduleController::convertEntityToDTO).collect(Collectors.toList());
     }
 
     private static ScheduleDTO convertEntityToDTO(Schedule entity) {

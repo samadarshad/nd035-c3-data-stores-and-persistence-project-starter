@@ -30,8 +30,8 @@ public class Employee extends User implements ScheduleConsumer {
     @ElementCollection
     private Set<DayOfWeek> daysAvailable;
 
-//    @ManyToMany
-//    private List<Schedule> schedules = new ArrayList<>();
+    @ManyToMany
+    private List<Schedule> schedules = new ArrayList<>();
 
     public Boolean addToSchedule(Schedule schedule) {
         return schedules.add(schedule);

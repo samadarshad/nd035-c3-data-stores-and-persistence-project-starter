@@ -11,8 +11,8 @@ import java.util.List;
 
 
 public interface ScheduleConsumer {
-    @ManyToMany
-    List<Schedule> schedules = new ArrayList<>();
+//    @ManyToMany
+//    List<Schedule> schedules = new ArrayList<>();
 
     Boolean addToSchedule(Schedule schedule);
 }
