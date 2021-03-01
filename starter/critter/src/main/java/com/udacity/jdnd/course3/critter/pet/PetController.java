@@ -62,9 +62,11 @@ public class PetController {
     private Pet convertDTOToEntity(PetDTO dto) {
         Pet entity = new Pet();
         BeanUtils.copyProperties(dto, entity);
-        entity.setOwner(
-                customerService.get(dto.getOwnerId())
-        );
+        if (dto.getOwnerId() != null) {
+            entity.setOwner(
+                    customerService.get(dto.getOwnerId())
+            );
+        }
         return entity;
     }
 }

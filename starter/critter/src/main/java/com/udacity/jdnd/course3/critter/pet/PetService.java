@@ -26,7 +26,9 @@ public class PetService {
     }
 
     public Pet save(Pet pet) {
-        pet.getOwner().addToPets(pet);
+        if (pet.getOwner() != null) {
+            pet.getOwner().addToPets(pet);
+        }
         return petRepository.save(pet);
     }
 
