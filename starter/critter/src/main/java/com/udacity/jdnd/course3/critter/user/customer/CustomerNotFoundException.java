@@ -1,15 +1,15 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.user.customer;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Pet not found")
-public class PetNotFoundException extends RuntimeException {
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Customer not found")
+public class CustomerNotFoundException extends RuntimeException {
 
-    public PetNotFoundException() {
+    public CustomerNotFoundException() {
     }
 
-    public PetNotFoundException(String message) {
+    public CustomerNotFoundException(String message) {
         super(message);
     }
 }

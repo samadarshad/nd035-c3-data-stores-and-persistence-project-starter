@@ -1,15 +1,15 @@
-package com.udacity.jdnd.course3.critter.user.customer;
+package com.udacity.jdnd.course3.critter.user.employee;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Customer not found")
-public class CustomerNotFoundException extends RuntimeException {
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Employee not found")
+public class EmployeeNotFoundException extends RuntimeException {
 
-    public CustomerNotFoundException() {
+    public EmployeeNotFoundException() {
     }
 
-    public CustomerNotFoundException(String message) {
+    public EmployeeNotFoundException(String message) {
         super(message);
     }
 }

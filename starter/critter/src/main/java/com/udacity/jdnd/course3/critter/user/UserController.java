@@ -41,6 +41,12 @@ public class UserController {
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
         Customer customer = convertDTOToEntity(customerDTO);
         customer = customerService.save(customer);
+
+        //update children
+        if (customerDTO.getPetIds() != null) {
+            Customer finalCustomer = customer;
+            customerDTO.getPetIds().forEach(petId -> petService.get(petId).setOwner(finalCustomer));
+        }
         return convertEntityToDTO(customer);
     }
 
@@ -83,12 +89,22 @@ public class UserController {
     private static CustomerDTO convertEntityToDTO(Customer entity) {
         CustomerDTO dto = new CustomerDTO();
         BeanUtils.copyProperties(entity, dto);
+        if (entity.getPets() != null) {
+            dto.setPetIds(
+                    entity.getPets().stream().map(Pet::getId).collect(Collectors.toList())
+            );
+        }
         return dto;
     }
 
-    private static Customer convertDTOToEntity(CustomerDTO dto) {
+    private Customer convertDTOToEntity(CustomerDTO dto) {
         Customer entity = new Customer();
         BeanUtils.copyProperties(dto, entity);
+        if (dto.getPetIds() != null) {
+            entity.setPets(
+                    dto.getPetIds().stream().map(petId -> petService.get(petId)).collect(Collectors.toList())
+            );
+        }
         return entity;
     }
 
